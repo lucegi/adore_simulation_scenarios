@@ -42,6 +42,7 @@ def generate_launch_description():
             executable='decision_maker',
             name='decision_maker',
             parameters=[
+                {"v2x_id": 1},
                 {"debug_mode_active": True},
                 {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
                 {"planner_settings_keys": [ "wheel_base",
@@ -123,6 +124,7 @@ def generate_launch_description():
              executable='decision_maker',
              name='decision_maker',
              parameters=[
+                 {"v2x_id": 2},
                  {"debug_mode_active": False},
                  {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
                  {"planner_settings_keys": [ "wheel_base",
