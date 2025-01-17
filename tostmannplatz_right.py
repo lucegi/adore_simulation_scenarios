@@ -3,6 +3,9 @@ from launch_ros.actions import Node
 import os
 
 def generate_launch_description():
+    launch_file_dir = os.path.dirname(os.path.realpath(__file__))
+    map_image_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/maps/"))
+    map_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/tracks/"))
     return LaunchDescription([
         Node(
             package='foxglove_bridge',
@@ -20,7 +23,7 @@ def generate_launch_description():
             executable='visualizer',
             name='visualizer',
             parameters=[
-                {"asset folder": os.path.abspath("assets/maps/")}
+                {"asset folder": map_image_folder}
             ]
         ),
         Node(
