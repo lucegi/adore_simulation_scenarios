@@ -48,6 +48,7 @@ def generate_launch_description():
                 {"v2x_id": 1},
                 {"debug_mode_active": False},
                 {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
+                {"only_follow_reference_trajectories": True},
                 {"planner_settings_keys": [ "wheel_base",
                                            "lateral_weight",
                                            "heading_weight",
@@ -64,6 +65,7 @@ def generate_launch_description():
                                                40.0,
                                                20.0]}
             ],
+            output={'both': 'log'},
         ),
         Node(
             package='mission_control',
@@ -103,7 +105,7 @@ def generate_launch_description():
                                                0.05,
                                                2.5]}
            ],
-           #output={'both': 'log'},
+           output={'both': 'log'},
        ),
 
         ########################################### second vehicle #########################################
@@ -130,6 +132,7 @@ def generate_launch_description():
                  {"v2x_id": 2},
                  {"debug_mode_active": False},
                  {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
+                 {"only_follow_reference_trajectories": True},
                  {"planner_settings_keys": [ "wheel_base",
                                             "lateral_weight",
                                             "heading_weight",
@@ -146,6 +149,7 @@ def generate_launch_description():
                                                 40.0,
                                                 20.0]}
              ],
+             output={'both': 'log'},
          ),
          Node(
              package='mission_control',
@@ -185,9 +189,11 @@ def generate_launch_description():
                                                 0.05,
                                                 2.5]}
             ],
-            #output={'both': 'log'},
+            output={'both': 'log'},
         ),
 
+        ############################################ Infrastructure ################################################
+        
        Node(
             package='decision_maker_infrastructure',
             namespace='infrastructure',
@@ -195,6 +201,17 @@ def generate_launch_description():
             name='decision_maker_infrastructure',
             parameters=[
                 {"R2S map file":  map_folder + "de_bs_borders_wfs.r2sr"},
+                {"infrastructure_position_x": 604790.672},
+                {"infrastructure_position_y": 5797129.799},
+            ]
+        ),
+        Node(
+            package='visualizer',
+            namespace='infrastructure',
+            executable='visualizer',
+            name='visualizer',
+            parameters=[
+                {"asset folder": map_image_folder}
             ]
         ),
      
