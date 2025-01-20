@@ -34,9 +34,9 @@ def generate_launch_description():
             executable='simulated_vehicle',
             name='simulated_vehicle',
             parameters=[
-                {"set_start_position_x": 604784.818},
-                {"set_start_position_y": 5797117.860},
-                {"set_start_psi": 2.63},
+                {"set_start_position_x": 604862.718},
+                {"set_start_position_y": 5797111.860},
+                {"set_start_psi": 0.0},
                 {"controllable": True},
             ]
         ),
@@ -47,7 +47,7 @@ def generate_launch_description():
             name='decision_maker',
             parameters=[
                 {"debug_mode_active": True},
-                {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
+                {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
                 {"planner_settings_keys": [ "wheel_base",
                                            "lateral_weight",
                                            "heading_weight",
@@ -72,8 +72,8 @@ def generate_launch_description():
             name='mission_control',
             parameters=[
                 {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
-                {"goal_position_x" : 604791.697},
-                {"goal_position_y": 5797180.0}
+                {"goal_position_x" : 604988.297},
+                {"goal_position_y": 5797111.0}
             ]
         ),
        Node(

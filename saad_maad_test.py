@@ -37,7 +37,6 @@ def generate_launch_description():
                 {"set_start_position_y": 5797117.860},
                 {"set_start_psi": 2.63},
                 {"controllable": True},
-                {"other_vehicle_namespaces": ["traffic_participant_2"]}
             ]
         ),
         Node(
@@ -47,7 +46,7 @@ def generate_launch_description():
             name='decision_maker',
             parameters=[
                 {"v2x_id": 1},
-                {"debug_mode_active": True},
+                {"debug_mode_active": False},
                 {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
                 {"planner_settings_keys": [ "wheel_base",
                                            "lateral_weight",
@@ -111,7 +110,7 @@ def generate_launch_description():
         
         Node(
             package='simulated_vehicle',
-            namespace='traffic_participant_2',
+            namespace='sim_vehicle_2',
             executable='simulated_vehicle',
             name='simulated_vehicle2',
             parameters=[
@@ -124,7 +123,7 @@ def generate_launch_description():
         ),
          Node(
              package='decision_maker',
-             namespace='traffic_participant_2',
+             namespace='sim_vehicle_2',
              executable='decision_maker',
              name='decision_maker2',
              parameters=[
@@ -150,7 +149,7 @@ def generate_launch_description():
          ),
          Node(
              package='mission_control',
-             namespace='traffic_participant_2',
+             namespace='sim_vehicle_2',
              executable='mission_control',
              name='mission_control2',
              parameters=[
@@ -161,7 +160,7 @@ def generate_launch_description():
          ),
         Node(
             package='trajectory_tracker',
-            namespace='traffic_participant_2',
+            namespace='sim_vehicle_2',
             executable='trajectory_tracker_node',
             name='trajectory_tracker2',
             parameters=[
