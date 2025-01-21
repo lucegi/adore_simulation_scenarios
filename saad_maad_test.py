@@ -200,7 +200,7 @@ def generate_launch_description():
             executable='decision_maker_infrastructure',
             name='decision_maker_infrastructure',
             parameters=[
-                {"R2S map file":  map_folder + "de_bs_borders_wfs.r2sr"},
+                {"R2S map file":  map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"infrastructure_position_x": 604790.672},
                 {"infrastructure_position_y": 5797129.799},
             ]
