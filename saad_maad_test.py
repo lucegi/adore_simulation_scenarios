@@ -18,15 +18,15 @@ def generate_launch_description():
                 {'port': 8765},
             ],
         ),
-        Node(
-            package='visualizer',
-            namespace='ego_vehicle',
-            executable='visualizer',
-            name='visualizer',
-            parameters=[
-                {"asset folder": map_image_folder}
-            ]
-        ),
+        # Node(
+        #     package='visualizer',
+        #     namespace='ego_vehicle',
+        #     executable='visualizer',
+        #     name='visualizer',
+        #     parameters=[
+        #         {"asset folder": map_image_folder}
+        #     ]
+        # ),
         Node(
             package='simulated_vehicle',
             namespace='ego_vehicle',
@@ -46,7 +46,7 @@ def generate_launch_description():
             name='decision_maker',
             parameters=[
                 {"v2x_id": 1},
-                {"debug_mode_active": False},
+                {"debug_mode_active": True},
                 {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
                 {"only_follow_reference_trajectories": True},
                 {"planner_settings_keys": [ "wheel_base",
@@ -65,7 +65,7 @@ def generate_launch_description():
                                                40.0,
                                                20.0]}
             ],
-            output={'both': 'log'},
+            # output={'both': 'log'},
         ),
         Node(
             package='mission_control',
@@ -105,7 +105,7 @@ def generate_launch_description():
                                                0.05,
                                                2.5]}
            ],
-           output={'both': 'log'},
+        #    output={'both': 'log'},
        ),
 
         ########################################### second vehicle #########################################
@@ -130,7 +130,7 @@ def generate_launch_description():
              name='decision_maker2',
              parameters=[
                  {"v2x_id": 2},
-                 {"debug_mode_active": False},
+                 {"debug_mode_active": True},
                  {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
                  {"only_follow_reference_trajectories": True},
                  {"planner_settings_keys": [ "wheel_base",
@@ -149,7 +149,7 @@ def generate_launch_description():
                                                 40.0,
                                                 20.0]}
              ],
-             output={'both': 'log'},
+            #  output={'both': 'log'},
          ),
          Node(
              package='mission_control',
@@ -189,7 +189,7 @@ def generate_launch_description():
                                                 0.05,
                                                 2.5]}
             ],
-            output={'both': 'log'},
+            # output={'both': 'log'},
         ),
 
         ############################################ Infrastructure ################################################
@@ -203,6 +203,7 @@ def generate_launch_description():
                 {"R2S map file":  map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"infrastructure_position_x": 604790.672},
                 {"infrastructure_position_y": 5797129.799},
+                {"debug_mode_active": True},
             ]
         ),
         Node(
