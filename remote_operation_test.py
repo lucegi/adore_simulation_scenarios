@@ -3,9 +3,11 @@ from launch_ros.actions import Node
 import os
 
 def generate_launch_description():
+        # Get the directory of this launch file
     launch_file_dir = os.path.dirname(os.path.realpath(__file__))
     map_image_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/maps/"))
     map_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/tracks/"))
+    
     return LaunchDescription([
         Node(
             package='foxglove_bridge',
@@ -38,11 +40,10 @@ def generate_launch_description():
             executable='simulated_vehicle',
             name='simulated_vehicle',
             parameters=[
-                {"set_start_position_x": 605105.00},
-                {"set_start_position_y": 5795182.83},
-                {"set_start_psi": 4.0}, # Radian
+                {"set_start_position_x": 604862.718},
+                {"set_start_position_y": 5797111.860},
+                {"set_start_psi": 0.0},
                 {"controllable": True},
-                #{"other_vehicle_namespaces": []}
             ]
         ),
         Node(
@@ -76,9 +77,9 @@ def generate_launch_description():
             executable='mission_control',
             name='mission_control',
             parameters=[
-                {"R2S map file": os.path.abspath("assets/tracks/de_bs_borders_wfs.r2sr")},
-                {"goal_position_x" : 604940.96},
-                {"goal_position_y": 5795131.84}
+                {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
+                {"goal_position_x" : 604988.297},
+                {"goal_position_y": 5797111.0}
             ]
         ),
        Node(
@@ -113,19 +114,20 @@ def generate_launch_description():
 
         ########################################### second vehicle #########################################
         
-        #Node(
-        #    package='simulated_vehicle',
-        #    namespace='traffic_participant_2',
-        #    executable='simulated_vehicle',
-        #    name='simulated_vehicle',
-        #    parameters=[
-        #        {"set_start_position_x": 604786.672},
-        #        {"set_start_position_y": 5797162.799},
-        #        {"set_start_psi": 1.22},
-        #        {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
-        #        {"controllable": True},
-        #    ]
-        #),
+        Node(
+            package='simulated_vehicle',
+            namespace='traffic_participant_2',
+            executable='simulated_vehicle',
+            name='simulated_vehicle',
+            parameters=[
+                {"set_start_position_x": 604786.672},
+                {"set_start_position_y": 5797162.799},
+                {"set_start_psi": 1.22},
+                {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
+                {"controllable": True},
+                {"vehicle_id": 2}
+            ]
+        ),
         # Node(
         #     package='decision_maker',
         #     namespace='traffic_participant_2',
