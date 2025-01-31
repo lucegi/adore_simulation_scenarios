@@ -67,7 +67,18 @@ def generate_launch_description():
                                                5.0,
                                                10.0,
                                                40.0,
-                                               20.0]}
+                                               20.0]},
+                {"request_assistance_polygon": [ 
+                                                605100.00,
+                                               5795172.83,
+                                                605100.00,
+                                               5795192.83,
+                                                605110.00,
+                                               5795192.83,
+                                                605110.00,
+                                               5795172.83,
+                                               ]},
+
             ],
         ),
         Node(
@@ -76,7 +87,7 @@ def generate_launch_description():
             executable='mission_control',
             name='mission_control',
             parameters=[
-                {"R2S map file": os.path.abspath("assets/tracks/de_bs_borders_wfs.r2sr")},
+                {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"goal_position_x" : 604940.96},
                 {"goal_position_y": 5795131.84}
             ]
