@@ -7,6 +7,8 @@ def generate_launch_description():
     launch_file_dir = os.path.dirname(os.path.realpath(__file__))
     map_image_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/maps/"))
     map_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/tracks/"))
+    vehicle_param = os.path.abspath(os.path.join(launch_file_dir, "../assets/vehicle_params/"))
+
     
     return LaunchDescription([
         Node(
@@ -44,6 +46,7 @@ def generate_launch_description():
                 {"set_start_position_y": 5797111.860},
                 {"set_start_psi": 0.0},
                 {"controllable": True},
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
         ),
         Node(

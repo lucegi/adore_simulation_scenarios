@@ -7,7 +7,8 @@ def generate_launch_description():
     launch_file_dir = os.path.dirname(os.path.realpath(__file__))
     map_image_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/maps/"))
     map_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/tracks/"))
-    
+    vehicle_param = os.path.abspath(os.path.join(launch_file_dir, "../assets/vehicle_params/"))
+
     return LaunchDescription([
         Node(
             package='foxglove_bridge',
@@ -17,6 +18,7 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {'port': 8765},
+                {'send_buffer_limit' : 500000000}
             ],
         ),
         Node(
@@ -38,6 +40,7 @@ def generate_launch_description():
                 {"set_start_position_y": 5797111.860},
                 {"set_start_psi": 0.0},
                 {"controllable": True},
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
         ),
         Node(
@@ -46,24 +49,12 @@ def generate_launch_description():
             executable='decision_maker',
             name='decision_maker',
             parameters=[
-                {"debug_mode_active": True},
-                {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
-                {"planner_settings_keys": [ "wheel_base",
-                                           "lateral_weight",
-                                           "heading_weight",
-                                           "maximum_velocity",
-                                           "min_distance_to_vehicle_ahead",
-                                           "look_ahead_for_curvature",
-                                           "look_behind_for_curvature"]},
+                {"debug_mode_active": False},
+                {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
 
-               {"planner_settings_values": [ 2.7,
-                                               0.2,
-                                               0.02,
-                                               5.0,
-                                               10.0,
-                                               40.0,
-                                               20.0]}
             ],
+            output={'both': 'log'},
         ),
         Node(
             package='mission_control',
@@ -82,7 +73,7 @@ def generate_launch_description():
            executable='trajectory_tracker_node',
            name='trajectory_tracker',
            parameters=[
-               {"set_controller": 1}, # 0 for MPC, 1 for PID
+               {"set_controller": 2}, # 0 for MPC, 1 for PID
                {"controller_settings_keys": [ "kp_x",
                                            "ki_x",
                                            "velocity_weight",
@@ -101,27 +92,30 @@ def generate_launch_description():
                                                0.3,
                                                0.1,
                                                0.05,
-                                               2.5]}
+                                               2.5]},
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"},
+
            ],
            #output={'both': 'log'},
        ),
 
         ########################################### second vehicle #########################################
         
-        Node(
-            package='simulated_vehicle',
-            namespace='traffic_participant_2',
-            executable='simulated_vehicle',
-            name='simulated_vehicle',
-            parameters=[
-                {"set_start_position_x": 604786.672},
-                {"set_start_position_y": 5797162.799},
-                {"set_start_psi": 1.22},
-                {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
-                {"controllable": True},
-                {"vehicle_id": 2}
-            ]
-        ),
+        # Node(
+        #     package='simulated_vehicle',
+        #     namespace='traffic_participant_2',
+        #     executable='simulated_vehicle',
+        #     name='simulated_vehicle',
+        #     parameters=[
+        #         {"set_start_position_x": 604786.672},
+        #         {"set_start_position_y": 5797162.799},
+        #         {"set_start_psi": 1.22},
+        #         {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
+        #         {"controllable": True},
+        #         {"vehicle_id": 2},
+        #         {"vehicle_model_file" : vehicle_param + "/NGC.json"},
+        #     ]
+        # ),
         # Node(
         #     package='decision_maker',
         #     namespace='traffic_participant_2',
@@ -144,7 +138,8 @@ def generate_launch_description():
         #                                        5.0,
         #                                        10.0,
         #                                        40.0,
-        #                                        20.0]}
+        #                                        20.0]},
+        #       {"vehicle_model_file" : vehicle_param + "/NGC.json"},
         #     ],
         # ),
         # Node(
@@ -183,7 +178,8 @@ def generate_launch_description():
     #                                            0.3,
     #                                            0.1,
     #                                            0.05,
-    #                                            2.5]}
+    #                                            2.5]},
+    #            {"vehicle_model_file" : vehicle_param + "/NGC.json"},
     #        ],
     #        #output={'both': 'log'},
     #    ),
@@ -225,7 +221,8 @@ def generate_launch_description():
         #                                         10.0,
         #                                         1.0,
         #                                         0.00000001,
-        #                                         0]}
+        #                                         0]},
+        #        {"vehicle_model_file" : vehicle_param + "/NGC.json"},
         #     ],
         #     #output={'both': 'log'},
         # ),
