@@ -26,7 +26,8 @@ def generate_launch_description():
             executable='visualizer',
             name='visualizer',
             parameters=[
-                {"asset folder": map_image_folder}
+                {"asset folder": map_image_folder},
+                {"whitelist": ["ego_vehicle"]}
             ]
         ),
         Node(

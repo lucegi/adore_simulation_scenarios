@@ -18,17 +18,20 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {'port': 8765},
+                {'send_buffer_limit' : 500000000}
+
             ],
         ),
-        # Node(
-        #     package='visualizer',
-        #     namespace='ego_vehicle',
-        #     executable='visualizer',
-        #     name='visualizer',
-        #     parameters=[
-        #         {"asset folder": map_image_folder}
-        #     ]
-        # ),
+        Node(
+            package='visualizer',
+            namespace='ego_vehicle',
+            executable='visualizer',
+            name='visualizer',
+            parameters=[
+                {"asset folder": map_image_folder},
+                {"whitelist": ["ego_vehicle", "infrastructure", "sim_vehicle_2", "sim_vehicle_3"]},
+            ]
+        ),
         Node(
             package='simulated_vehicle',
             namespace='ego_vehicle',
@@ -51,7 +54,7 @@ def generate_launch_description():
                 {"v2x_id": 1},
                 {"debug_mode_active": True},
                 {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
-                {"only_follow_reference_trajectories": True},
+                {"only_follow_reference_trajectories": False},
                 {"planner_settings_keys": [ "wheel_base",
                                            "lateral_weight",
                                            "heading_weight",
@@ -126,6 +129,7 @@ def generate_launch_description():
                 {"set_start_psi": 2.22},
                 {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
                 {"controllable": True},
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
         ),
          Node(
@@ -137,7 +141,7 @@ def generate_launch_description():
                  {"v2x_id": 2},
                  {"debug_mode_active": True},
                  {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
-                 {"only_follow_reference_trajectories": True},
+                 {"only_follow_reference_trajectories": False},
                  {"planner_settings_keys": [ "wheel_base",
                                             "lateral_weight",
                                             "heading_weight",
@@ -224,7 +228,7 @@ def generate_launch_description():
                  {"v2x_id": 3},
                  {"debug_mode_active": True},
                  {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
-                 {"only_follow_reference_trajectories": True},
+                 {"only_follow_reference_trajectories": False},
                  {"planner_settings_keys": [ "wheel_base",
                                             "lateral_weight",
                                             "heading_weight",
@@ -298,17 +302,12 @@ def generate_launch_description():
                 {"infrastructure_position_x": 604790.672},
                 {"infrastructure_position_y": 5797129.799},
                 {"debug_mode_active": True},
+                {"validity_polygon": [604750.672, 5797109.799,
+                                       604750.672, 5797139.799,
+                                       604799.672, 5797139.799,
+                                       604799.672, 5797109.799,] }
             ]
-        ),
-        Node(
-            package='visualizer',
-            namespace='infrastructure',
-            executable='visualizer',
-            name='visualizer',
-            parameters=[
-                {"asset folder": map_image_folder}
-            ]
-        ),
+        )
      
      ]
 )
