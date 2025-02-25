@@ -74,7 +74,7 @@ def generate_launch_description():
             executable='mission_control',
             name='mission_control',
             parameters=[
-                {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
+                {"map file": map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"goal_position_x" : 605055.41},
                 {"goal_position_y": 5795026.90}
             ]
@@ -156,7 +156,7 @@ def generate_launch_description():
         #     executable='mission_control',
         #     name='mission_control',
         #     parameters=[
-        #         {"R2S map file": os.path.abspath("assets/tracks/de_bs_borders_wfs.r2sr")},
+        #         {"map file": os.path.abspath("assets/tracks/de_bs_borders_wfs.r2sr")},
         #         {"goal_position_x" : 604791.697},
         #         {"goal_position_y": 5797180.0}
         #     ]
