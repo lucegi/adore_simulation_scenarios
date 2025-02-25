@@ -6,6 +6,8 @@ def generate_launch_description():
     launch_file_dir = os.path.dirname(os.path.realpath(__file__))
     map_image_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/maps/"))
     map_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/tracks/"))
+    vehicle_param = os.path.abspath(os.path.join(launch_file_dir, "../assets/vehicle_params/"))
+
     return LaunchDescription([
         Node(
             package='foxglove_bridge',
@@ -23,8 +25,15 @@ def generate_launch_description():
             executable='visualizer',
             name='visualizer',
             parameters=[
-                {"asset folder": map_image_folder}
+                {"asset folder": map_image_folder},
+                {"whitelist": ["ego_vehicle"]}
             ]
+        ),
+        Node(
+            package='simulated_remote_operator',
+            namespace='ego_vehicle',
+            executable='simulated_remote_operator',
+            name='simulated_remote_operator',
         ),
         Node(
             package='simulated_vehicle',
@@ -36,7 +45,7 @@ def generate_launch_description():
                 {"set_start_position_y": 5795182.83},
                 {"set_start_psi": 4.0}, # Radian
                 {"controllable": True},
-                #{"other_vehicle_namespaces": []}
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
         ),
         Node(
@@ -61,7 +70,19 @@ def generate_launch_description():
                                                5.0,
                                                10.0,
                                                40.0,
-                                               20.0]}
+                                               20.0]},
+                {"request_assistance_polygon": [ 
+                                                605100.00,
+                                               5795172.83,
+                                                605100.00,
+                                               5795192.83,
+                                                605110.00,
+                                               5795192.83,
+                                                605110.00,
+                                               5795172.83,
+                                               ]},
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
+
             ],
         ),
         Node(
@@ -70,7 +91,7 @@ def generate_launch_description():
             executable='mission_control',
             name='mission_control',
             parameters=[
-                {"R2S map file": os.path.abspath("assets/tracks/de_bs_borders_wfs.r2sr")},
+                {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"goal_position_x" : 604940.96},
                 {"goal_position_y": 5795131.84}
             ]
@@ -100,7 +121,8 @@ def generate_launch_description():
                                                0.3,
                                                0.1,
                                                0.05,
-                                               2.5]}
+                                               2.5]},
+                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
            ],
            #output={'both': 'log'},
        ),
