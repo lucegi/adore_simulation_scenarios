@@ -80,7 +80,7 @@ def generate_launch_description():
             executable='mission_control',
             name='mission_control',
             parameters=[
-                {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
+                {"map file": map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"goal_position_x" : 604791.697},
                 {"goal_position_y": 5797180.0}
             ]
@@ -167,7 +167,7 @@ def generate_launch_description():
              executable='mission_control',
              name='mission_control2',
              parameters=[
-                {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
+                {"map file": map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"goal_position_x" : 604791.697},
                 {"goal_position_y": 5797180.0}
              ]
@@ -254,7 +254,7 @@ def generate_launch_description():
              executable='mission_control',
              name='mission_control3',
              parameters=[
-                {"R2S map file": map_folder + "/de_bs_borders_wfs.r2sr"},
+                {"map file": map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"goal_position_x" : 604791.697},
                 {"goal_position_y": 5797180.0}
              ]
@@ -298,7 +298,7 @@ def generate_launch_description():
             executable='decision_maker_infrastructure',
             name='decision_maker_infrastructure',
             parameters=[
-                {"R2S map file":  map_folder + "/de_bs_borders_wfs.r2sr"},
+                {"map file":  map_folder + "/de_bs_borders_wfs.r2sr"},
                 {"infrastructure_position_x": 604790.672},
                 {"infrastructure_position_y": 5797129.799},
                 {"debug_mode_active": True},
