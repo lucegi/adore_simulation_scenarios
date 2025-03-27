@@ -24,12 +24,17 @@ def generate_launch_description():
         Node(
             package='visualizer',
             namespace='ego_vehicle',
-            executable='visualizer',
+            executable='vehicle_visualizer_node',
             name='visualizer',
             parameters=[
                 {"asset folder": map_image_folder},
-                {"whitelist": ["ego_vehicle"]}
-            ]
+                {"visualize_vehicle": True},
+                {"visualize_planned_trajectory": True},
+                {"visualize_route": True},
+                {"visualize_local_map": True},
+                {"visualize_goal_point": True},
+                {"visualize_map_image": True},
+             ],
         ),
         Node(
             package='simulated_vehicle',
