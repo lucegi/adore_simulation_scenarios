@@ -21,6 +21,52 @@ def generate_launch_description():
                 {'send_buffer_limit' : 500000000}
             ],
         ),
+        # ================ infrastructure  ==================
+        Node(
+            package='simulated_infrastructure',
+            namespace='infrastructure',
+            executable='simulated_infrastructure',
+            name='simulated_infrastructure',
+            parameters=[
+                {"infrastructure_position_x": 604790.672},
+                {"infrastructure_position_y": 5797129.799},
+                {"validity_polygon": [604750.672, 5797109.799,
+                                       604750.672, 5797160.799,
+                                       604799.672, 5797160.799,
+                                       604799.672, 5797109.799,] }
+            ]
+        ),
+        Node(
+            package='visualizer',
+            namespace='infrastructure',
+            executable='infrastructure_visualizer_node',
+            name='visualizer',
+            parameters=[
+                {"asset folder": map_image_folder},
+                {"visualize_infrastructure": True},
+                {"visualize_local_map": True},
+                {"visualize_validity_area": True},
+                {"visualize_map_image": True}, # Only one visualizer can show images
+                {"visualize_traffic_participants": True},
+            ]
+        ),
+       Node(
+            package='decision_maker_infrastructure',
+            namespace='infrastructure',
+            executable='decision_maker_infrastructure',
+            name='decision_maker_infrastructure',
+            parameters=[
+                {"map file":  map_folder + "/de_bs_borders_wfs.r2sr"},
+                {"infrastructure_position_x": 604790.672},
+                {"infrastructure_position_y": 5797129.799},
+                {"debug_mode_active": False},
+                {"validity_polygon": [604750.672, 5797109.799,
+                                       604750.672, 5797160.799,
+                                       604799.672, 5797160.799,
+                                       604799.672, 5797109.799,] }
+            ]
+        ),
+
         # ================ VEHICLE 1 ========================
         Node(
             package='visualizer',
@@ -29,21 +75,24 @@ def generate_launch_description():
             name='visualizer',
             parameters=[
                 {"asset folder": map_image_folder},
-                {"visualize_vehicle": True},
-                {"visualize_planned_trajectory": True},
-                {"visualize_route": True},
-                {"visualize_local_map": True},
-                {"visualize_goal_point": True},
-                {"visualize_map_image": True},
-                {"visualize_traffic_participants": True},
+                {"visualize_vehicle": False},
+                {"visualize_planned_trajectory": False},
+                {"visualize_route": False},
+                {"visualize_local_map": False},
+                {"visualize_goal_point": False},
+                {"visualize_map_image": False},
+                {"visualize_traffic_participants": False},
              ],
         ),
-        Node(
-            package='simulation_vehicle_interface',
-            namespace='ego_vehicle',
-            executable='simulation_vehicle_interface',
-            name='simulation_vehicle_interface',
-        ),
+        # Node(
+        #     package='simulation_vehicle_interface',
+        #     namespace='ego_vehicle',
+        #     executable='simulation_vehicle_interface',
+        #     name='simulation_vehicle_interface',
+        #     parameters=[
+        #         {"traffic_participant_detection_range": 300.0},
+        #      ],
+        # ),
         Node(
             package='simulated_vehicle',
             namespace='ego_vehicle',
@@ -54,7 +103,8 @@ def generate_launch_description():
                 {"set_start_position_y": 5797111.860},
                 {"set_start_psi": 0.0},
                 {"controllable": True},
-                {"v2x_id": 1},
+                {"id": 111}, # Make sure this is unique for each vehicle
+                {"v2x_id": 111},
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
         ),
@@ -123,23 +173,23 @@ def generate_launch_description():
             name='visualizer',
             parameters=[
                 {"asset folder": map_image_folder},
-                {"visualize_vehicle": True},
-                {"visualize_planned_trajectory": True},
-                {"visualize_route": True},
+                {"visualize_vehicle": False},
+                {"visualize_planned_trajectory": False},
+                {"visualize_route": False},
                 {"visualize_local_map": False},
-                {"visualize_goal_point": True},
+                {"visualize_goal_point": False},
                 {"visualize_map_image": False},
              ],
         ),
-        Node(
-            package='simulation_vehicle_interface',
-            namespace='sim_vehicle_1',
-            executable='simulation_vehicle_interface',
-            name='simulation_vehicle_interface',
-            parameters=[
-                {"asset folder": map_image_folder},
-             ],
-        ),
+        # Node(
+        #     package='simulation_vehicle_interface',
+        #     namespace='sim_vehicle_1',
+        #     executable='simulation_vehicle_interface',
+        #     name='simulation_vehicle_interface',
+        #     parameters=[
+        #         {"traffic_participant_detection_range": 300.0},
+        #      ],
+        # ),
         Node(
             package='simulated_vehicle',
             namespace='sim_vehicle_1',
@@ -151,7 +201,7 @@ def generate_launch_description():
                 {"set_start_psi": 0.0},
                 {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
                 {"controllable": True},
-                {"vehicle_id": 2},
+                {"vehicle_id": 333},
                 {"v2x_id": 0},
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
@@ -223,21 +273,21 @@ def generate_launch_description():
                 {"asset folder": map_image_folder},
                 {"visualize_vehicle": True},
                 {"visualize_planned_trajectory": True},
-                {"visualize_route": True},
+                {"visualize_route": False},
                 {"visualize_local_map": False},
-                {"visualize_goal_point": True},
+                {"visualize_goal_point": False},
                 {"visualize_map_image": False},
              ],
         ),
-        Node(
-            package='simulation_vehicle_interface',
-            namespace='sim_vehicle_2',
-            executable='simulation_vehicle_interface',
-            name='simulation_vehicle_interface',
-            parameters=[
-                {"asset folder": map_image_folder},
-             ],
-        ),
+        # Node(
+        #     package='simulation_vehicle_interface',
+        #     namespace='sim_vehicle_2',
+        #     executable='simulation_vehicle_interface',
+        #     name='simulation_vehicle_interface',
+        #     parameters=[
+        #         {"traffic_participant_detection_range": 300.0},
+        #      ],
+        # ),
         Node(
             package='simulated_vehicle',
             namespace='sim_vehicle_2',
@@ -249,8 +299,8 @@ def generate_launch_description():
                 {"set_start_psi": 6.28 * (3/4)},
                 {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
                 {"controllable": True},
-                {"vehicle_id": 3}, # Make sure this is unique for each vehicle
-                {"v2x_id": 0},
+                {"vehicle_id": 222}, # Make sure this is unique for each vehicle
+                {"v2x_id": 222},
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
         ),
@@ -265,7 +315,7 @@ def generate_launch_description():
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"}
 
             ],
-            output={'both': 'log'},
+            # output={'both': 'log'},
         ),
         Node(
             package='mission_control',
