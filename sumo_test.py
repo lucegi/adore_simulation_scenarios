@@ -31,7 +31,7 @@ def generate_launch_description():
             parameters=[
                 {"set_start_position_x": 1.0},
                 {"set_start_position_y": -52.0},
-                {"set_start_psi": 3.14},
+                {"set_start_psi": 0.0},
                 {"controllable": True},
                 {"other_vehicle_namespaces": ["traffic_participant_2"]}
             ]
