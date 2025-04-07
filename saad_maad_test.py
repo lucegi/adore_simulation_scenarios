@@ -46,7 +46,7 @@ def generate_launch_description():
                 {"visualize_infrastructure": True},
                 {"visualize_local_map": True},
                 {"visualize_validity_area": True},
-                {"visualize_map_image": True}, # Only one visualizer can show images
+                {"visualize_map_image": False}, # Only one visualizer can show images
                 {"visualize_traffic_participants": True},
             ]
         ),
@@ -76,7 +76,8 @@ def generate_launch_description():
             parameters=[
                 {"asset folder": map_image_folder},
                 {"visualize_vehicle": False},
-                {"visualize_planned_trajectory": False},
+                {"visualize_trajectory": False},
+                {"visualize_state": True},
                 {"visualize_route": False},
                 {"visualize_local_map": False},
                 {"visualize_goal_point": True},
@@ -94,7 +95,7 @@ def generate_launch_description():
                 {"set_start_position_y": 5797113.518},
                 {"set_start_psi": 3.14},
                 {"controllable": True},
-                {"id": 111}, # Make sure this is unique for each vehicle
+                {"vehicle_id": 111},# Make sure this is unique for each vehicle
                 {"v2x_id": 111},
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"}
             ]
@@ -165,7 +166,8 @@ def generate_launch_description():
             parameters=[
                 {"asset folder": map_image_folder},
                 {"visualize_vehicle": False},
-                {"visualize_planned_trajectory": False},
+                {"visualize_trajectory": False},
+                {"visualize_state": True},
                 {"visualize_route": False},
                 {"visualize_local_map": False},
                 {"visualize_goal_point": True},
@@ -254,7 +256,8 @@ def generate_launch_description():
             parameters=[
                 {"asset folder": map_image_folder},
                 {"visualize_vehicle": False},
-                {"visualize_planned_trajectory": False},
+                {"visualize_trajectory": False},
+                {"visualize_state": True},
                 {"visualize_route": False},
                 {"visualize_local_map": False},
                 {"visualize_goal_point": True},
@@ -267,7 +270,7 @@ def generate_launch_description():
             executable='simulated_vehicle',
             name='simulated_vehicle',
             parameters=[
-                {"set_start_position_x": 604788.611},
+                {"set_start_position_x": 604787.611},
                 {"set_start_position_y": 5797185.181},
                 {"set_start_psi": 5.0 },
                 {"set_shape": [4.5, 2.0, 2.0]}, # length, width, height
@@ -288,7 +291,7 @@ def generate_launch_description():
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"}
 
             ],
-            # output={'both': 'log'},
+            output={'both': 'log'},
         ),
         Node(
             package='mission_control',
