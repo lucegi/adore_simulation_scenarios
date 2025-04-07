@@ -101,19 +101,6 @@ def generate_launch_description():
             ]
         ),
         Node(
-            package='decision_maker',
-            namespace='ego_vehicle',
-            executable='decision_maker',
-            name='decision_maker',
-            parameters=[
-                {"debug_mode_active": False},
-                {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
-                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
-
-            ],
-            output={'both': 'log'},
-        ),
-        Node(
             package='mission_control',
             namespace='ego_vehicle',
             executable='mission_control',
@@ -124,37 +111,65 @@ def generate_launch_description():
                 {"goal_position_y": 5797111.0}
             ]
         ),
-       Node(
-           package='trajectory_tracker',
-           namespace='ego_vehicle',
-           executable='trajectory_tracker_node',
-           name='trajectory_tracker',
-           parameters=[
-               {"set_controller": 2}, # 0 for MPC, 1 for PID
-               {"controller_settings_keys": [ "kp_x",
-                                           "ki_x",
-                                           "velocity_weight",
-                                           "kp_y",
-                                           "ki_y",
+        Node(
+            package='decision_maker',
+            namespace='ego_vehicle',
+            executable='decision_maker',
+            name='decision_maker',
+            parameters=[
+                {"debug_mode_active": True},
+                {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
+                {"planner_settings_keys": [ "wheel_base",
+                                           "lateral_weight",
                                            "heading_weight",
-                                           "kp_omega",
-                                           "dt",
-                                           "steering_comfort"]},
+                                           "maximum_velocity",
+                                           "min_distance_to_vehicle_ahead",
+                                           "look_ahead_for_curvature",
+                                           "look_behind_for_curvature"]},
 
-               {"controller_settings_values": [ 0.3,
+               {"planner_settings_values": [ 2.7,
+                                               0.2,
                                                0.02,
-                                               0.3,
-                                               0.25,
-                                               0.0,
-                                               0.3,
-                                               0.1,
-                                               0.05,
-                                               2.5]},
+                                               4.0,
+                                               7.0,
+                                               40.0,
+                                               20.0]},
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"},
 
-           ],
-           #output={'both': 'log'},
-       ),
+            ],
+            output={'both': 'log'},
+        ),
+        Node(
+            package='trajectory_tracker',
+            namespace='ego_vehicle',
+            executable='trajectory_tracker_node',
+            name='trajectory_tracker',
+            parameters=[
+                {"set_controller": 1}, # 0 for MPC, 1 for PID
+                {"controller_settings_keys": [ "kp_x",
+                                            "ki_x",
+                                            "velocity_weight",
+                                            "kp_y",
+                                            "ki_y",
+                                            "heading_weight",
+                                            "kp_omega",
+                                            "dt",
+                                            "steering_comfort"]},
+
+                {"controller_settings_values": [ 0.3,
+                                                0.02,
+                                                0.3,
+                                                0.25,
+                                                0.0,
+                                                0.3,
+                                                0.1,
+                                                0.05,
+                                                2.5]},
+                 {"vehicle_model_file" : vehicle_param + "/NGC.json"},
+
+            ],
+            #output={'both': 'log'},
+        ),
 
         ########################################### second vehicle #########################################
 
@@ -191,19 +206,6 @@ def generate_launch_description():
             ]
         ),
         Node(
-            package='decision_maker',
-            namespace='sim_vehicle_1',
-            executable='decision_maker',
-            name='decision_maker',
-            parameters=[
-                {"debug_mode_active": False},
-                {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
-                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
-
-            ],
-            output={'both': 'log'},
-        ),
-        Node(
             package='mission_control',
             namespace='sim_vehicle_1',
             executable='mission_control',
@@ -214,37 +216,65 @@ def generate_launch_description():
                 {"goal_position_y": 5797180.0}
             ]
         ),
-       Node(
-           package='trajectory_tracker',
-           namespace='sim_vehicle_1',
-           executable='trajectory_tracker_node',
-           name='trajectory_tracker',
-           parameters=[
-               {"set_controller": 2}, # 0 for MPC, 1 for PID
-               {"controller_settings_keys": [ "kp_x",
-                                           "ki_x",
-                                           "velocity_weight",
-                                           "kp_y",
-                                           "ki_y",
+        Node(
+            package='decision_maker',
+            namespace='sim_vehicle_1',
+            executable='decision_maker',
+            name='decision_maker',
+            parameters=[
+                {"debug_mode_active": True},
+                {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
+                {"planner_settings_keys": [ "wheel_base",
+                                           "lateral_weight",
                                            "heading_weight",
-                                           "kp_omega",
-                                           "dt",
-                                           "steering_comfort"]},
+                                           "maximum_velocity",
+                                           "min_distance_to_vehicle_ahead",
+                                           "look_ahead_for_curvature",
+                                           "look_behind_for_curvature"]},
 
-               {"controller_settings_values": [ 0.3,
+               {"planner_settings_values": [ 2.7,
+                                               0.2,
                                                0.02,
-                                               0.3,
-                                               0.25,
-                                               0.0,
-                                               0.3,
-                                               0.1,
-                                               0.05,
-                                               2.5]},
+                                               4.0,
+                                               7.0,
+                                               40.0,
+                                               20.0]},
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"},
 
-           ],
-           #output={'both': 'log'},
-       ),
+            ],
+            output={'both': 'log'},
+        ),
+        Node(
+            package='trajectory_tracker',
+            namespace='sim_vehicle_1',
+            executable='trajectory_tracker_node',
+            name='trajectory_tracker',
+            parameters=[
+                {"set_controller": 1}, # 0 for MPC, 1 for PID
+                {"controller_settings_keys": [ "kp_x",
+                                            "ki_x",
+                                            "velocity_weight",
+                                            "kp_y",
+                                            "ki_y",
+                                            "heading_weight",
+                                            "kp_omega",
+                                            "dt",
+                                            "steering_comfort"]},
+
+                {"controller_settings_values": [ 0.3,
+                                                0.02,
+                                                0.3,
+                                                0.25,
+                                                0.0,
+                                                0.3,
+                                                0.1,
+                                                0.05,
+                                                2.5]},
+                 {"vehicle_model_file" : vehicle_param + "/NGC.json"},
+
+            ],
+            #output={'both': 'log'},
+        ),
      ########################################### third vehicle #########################################
 
 
@@ -281,19 +311,6 @@ def generate_launch_description():
             ]
         ),
         Node(
-            package='decision_maker',
-            namespace='sim_vehicle_2',
-            executable='decision_maker',
-            name='decision_maker',
-            parameters=[
-                {"debug_mode_active": False},
-                {"optinlc_route_following": False}, # 0 for Lane following, 1 for OptiNLC route following
-                {"vehicle_model_file" : vehicle_param + "/NGC.json"}
-
-            ],
-            output={'both': 'log'},
-        ),
-        Node(
             package='mission_control',
             namespace='sim_vehicle_2',
             executable='mission_control',
@@ -304,36 +321,64 @@ def generate_launch_description():
                 {"goal_position_y": 5797180.0}
             ]
         ),
-       Node(
-           package='trajectory_tracker',
-           namespace='sim_vehicle_2',
-           executable='trajectory_tracker_node',
-           name='trajectory_tracker',
-           parameters=[
-               {"set_controller": 2}, # 0 for MPC, 1 for PID
-               {"controller_settings_keys": [ "kp_x",
-                                           "ki_x",
-                                           "velocity_weight",
-                                           "kp_y",
-                                           "ki_y",
+        Node(
+            package='decision_maker',
+            namespace='sim_vehicle_2',
+            executable='decision_maker',
+            name='decision_maker',
+            parameters=[
+                {"debug_mode_active": True},
+                {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
+                {"planner_settings_keys": [ "wheel_base",
+                                           "lateral_weight",
                                            "heading_weight",
-                                           "kp_omega",
-                                           "dt",
-                                           "steering_comfort"]},
+                                           "maximum_velocity",
+                                           "min_distance_to_vehicle_ahead",
+                                           "look_ahead_for_curvature",
+                                           "look_behind_for_curvature"]},
 
-               {"controller_settings_values": [ 0.3,
+               {"planner_settings_values": [ 2.7,
+                                               0.2,
                                                0.02,
-                                               0.3,
-                                               0.25,
-                                               0.0,
-                                               0.3,
-                                               0.1,
-                                               0.05,
-                                               2.5]},
+                                               4.0,
+                                               7.0,
+                                               40.0,
+                                               20.0]},
                 {"vehicle_model_file" : vehicle_param + "/NGC.json"},
 
-           ],
-           #output={'both': 'log'},
-       ),
+            ],
+            # output={'both': 'log'},
+        ),
+        Node(
+            package='trajectory_tracker',
+            namespace='sim_vehicle_2',
+            executable='trajectory_tracker_node',
+            name='trajectory_tracker',
+            parameters=[
+                {"set_controller": 1}, # 0 for MPC, 1 for PID
+                {"controller_settings_keys": [ "kp_x",
+                                            "ki_x",
+                                            "velocity_weight",
+                                            "kp_y",
+                                            "ki_y",
+                                            "heading_weight",
+                                            "kp_omega",
+                                            "dt",
+                                            "steering_comfort"]},
+
+                {"controller_settings_values": [ 0.3,
+                                                0.02,
+                                                0.3,
+                                                0.25,
+                                                0.0,
+                                                0.3,
+                                                0.1,
+                                                0.05,
+                                                2.5]},
+                 {"vehicle_model_file" : vehicle_param + "/NGC.json"},
+
+            ],
+            #output={'both': 'log'},
+        ),
     ]
 )
