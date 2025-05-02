@@ -107,7 +107,7 @@ def generate_launch_description():
             name='mission_control',
             parameters=[
                 {"map file": map_folder + "/de_bs_borders_wfs.r2sr"},
-                {"goal_position_x" : 604988.297},
+                {"goal_position_x": 604988.297},
                 {"goal_position_y": 5797111.0}
             ]
         ),
@@ -118,6 +118,18 @@ def generate_launch_description():
             name='decision_maker',
             parameters=[
                 {"debug_mode_active": True},
+                {"optimize_reference_trajectory ": True},
+                {"optimizer_planner_settings_keys": [ "intermediate_integration",
+                                                       "max_iterations",
+                                                       "osqp_max_iterations",
+                                                       "OptiNLC_ACC",
+                                                       "time_limit"]},
+
+               {"optimizer_planner_settings_values": [ 3, #intermediate_integration  
+                                                       500, #max_iterations
+                                                       500, #osqp_max_iterations 
+                                                       1e-4, #OptiNLC_ACC
+                                                       0.09]}, #time_limit
                 {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
                 {"planner_settings_keys": [ "wheel_base",
                                            "lateral_weight",
@@ -223,6 +235,18 @@ def generate_launch_description():
             name='decision_maker',
             parameters=[
                 {"debug_mode_active": True},
+                {"optimize_reference_trajectory ": True},
+                {"optimizer_planner_settings_keys": [ "intermediate_integration",
+                                                       "max_iterations",
+                                                       "osqp_max_iterations",
+                                                       "OptiNLC_ACC",
+                                                       "time_limit"]},
+
+               {"optimizer_planner_settings_values": [ 3, #intermediate_integration  
+                                                       500, #max_iterations
+                                                       500, #osqp_max_iterations 
+                                                       1e-4, #OptiNLC_ACC
+                                                       0.09]}, #time_limit
                 {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
                 {"planner_settings_keys": [ "wheel_base",
                                            "lateral_weight",
@@ -328,6 +352,19 @@ def generate_launch_description():
             name='decision_maker',
             parameters=[
                 {"debug_mode_active": True},
+                {"optimize_reference_trajectory ": True},
+                {"optimizer_planner_settings_keys": [ "intermediate_integration",
+                                                       "max_iterations",
+                                                       "osqp_max_iterations",
+                                                       "OptiNLC_ACC",
+                                                       "time_limit"]},
+
+               {"optimizer_planner_settings_values": [ 3, #intermediate_integration  
+                                                       500, #max_iterations
+                                                       500, #osqp_max_iterations 
+                                                       1e-4, #OptiNLC_ACC
+                                                       0.09]}, #time_limit
+
                 {"optinlc_route_following": True}, # 0 for Lane following, 1 for OptiNLC route following
                 {"planner_settings_keys": [ "wheel_base",
                                            "lateral_weight",
