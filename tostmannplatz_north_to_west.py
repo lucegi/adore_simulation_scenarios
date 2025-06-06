@@ -33,6 +33,7 @@ def generate_launch_description():
             v2x_id=0,
             vehicle_id=0,
             controller=1,
-            debug=False
+            debug=False,
+            local_map_size=150.0
         )
     ])

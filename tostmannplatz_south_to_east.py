@@ -25,15 +25,15 @@ def generate_launch_description():
 
         *create_simulated_vehicle_nodes(
             namespace="ego_vehicle",
-            start_pose=(605105.0,     5795182.83, -1.5),
-            goal_position=(605051.41, 5795026.90),
+            start_pose=(605057.101, 5794980.142, 1.5),
+            goal_position=(605134.367, 5795048.610),
             map_file=map_file,
             model_file=vehicle_model_file,
             controllable=True,
             v2x_id=0,
             vehicle_id=0,
             controller=1,
-            debug=False
+            debug=False,
+            local_map_size=150.0,
         )
     ])
-
