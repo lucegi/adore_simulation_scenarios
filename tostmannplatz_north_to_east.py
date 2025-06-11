@@ -1,4 +1,5 @@
 from launch import LaunchDescription
+from launch_ros.actions import Node
 import os
 import sys
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,6 +36,62 @@ def generate_launch_description():
             controller=1,
             debug=False,
             local_map_size=150.0
-        )
+        ),
+        Node(
+            package='simulated_traffic_signal',
+            namespace='ego_vehicle',
+            executable='simulated_traffic_signal',
+            name='traffic_lights',
+            parameters=[
+                {"traffic_lights": ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8"]},
+                {"t1.x": 605072.0},
+                {"t1.y": 5795118.348},
+                {"t1.red_duration": 30.0},
+                {"t1.yellow_duration": 5.0},
+                {"t1.green_duration": 30.0},
+
+                {"t2.x": 605075.0},
+                {"t2.y": 5795117.348},
+                {"t2.red_duration": 30.0},
+                {"t2.yellow_duration": 5.0},
+                {"t2.green_duration": 30.0},
+
+                {"t3.x": 605063.8},
+                {"t3.y": 5795052.486},
+                {"t3.red_duration": 30.0},
+                {"t3.yellow_duration": 5.0},
+                {"t3.green_duration": 30.0},
+
+                {"t4.x": 605066.794},
+                {"t4.y": 5795052.2},
+                {"t4.red_duration": 30.0},
+                {"t4.yellow_duration": 5.0},
+                {"t4.green_duration": 30.0},
+
+                {"t5.x": 605070.0},
+                {"t5.y": 5795051.986},
+                {"t5.red_duration": 30.0},
+                {"t5.yellow_duration": 5.0},
+                {"t5.green_duration": 30.0},
+
+                {"t6.x": 605087.505},
+                {"t6.y": 5795064.942},
+                {"t6.red_duration": 30.0},
+                {"t6.yellow_duration": 5.0},
+                {"t6.green_duration": 30.0},
+
+                {"t7.x": 605045.124},
+                {"t7.y": 5795104.993},
+                {"t7.red_duration": 30.0},
+                {"t7.yellow_duration": 5.0},
+                {"t7.green_duration": 30.0},
+
+                {"t8.x": 605045.124},
+                {"t8.y": 5795107.993},
+                {"t8.red_duration": 30.0},
+                {"t8.yellow_duration": 5.0},
+                {"t8.green_duration": 30.0},
+            ]
+        ),
     ])
 
