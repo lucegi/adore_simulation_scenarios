@@ -25,26 +25,25 @@ def generate_launch_description():
 
         *create_simulated_vehicle_nodes(
             namespace="ego_vehicle",
-            start_pose=(605105.0, 5795182.83, -1.0),
-            goal_position=(604940.9,5795131.8),
+            start_pose=(604803.04, 5797112.376, 3.06),
+            goal_position=(604791.697, 5797180.0),
             map_file=map_file,
             model_file=vehicle_model_file,
             controllable=True,
-            v2x_id=0,
             vehicle_id=0,
             controller=1,
             debug=False
         ),
 
         *create_simulated_vehicle_nodes(
-            namespace="ego_vehicle",
-            start_pose=(605062.09, 5795008.01, -1.0),
-            goal_position=(605062.09, 5795008.01),
+            namespace="traffic_participant_1",
+            start_pose=(604763.44, 5797112.98, 0.05),
+            goal_position=(604791.697, 5797180.0),
             map_file=map_file,
             model_file=vehicle_model_file,
             controllable=True,
-            v2x_id=0,
-            vehicle_id=0,
+            v2x_id=1,
+            vehicle_id=1,
             controller=1,
             debug=False
         )
