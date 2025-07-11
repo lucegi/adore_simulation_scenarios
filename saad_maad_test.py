@@ -44,30 +44,45 @@ def generate_launch_description():
             goal_position=(604988.297, 5797111.0),
             vehicle_id=111,
             v2x_id=111,
-            model_file=vehicle_model_file,
             map_file=map_file,
+            model_file=vehicle_model_file,
+            controllable=True,
+            optinlc_route_following=True,
+            controller=1,
+            debug=False,
+            composable=False,
             shape=(4.5, 2.0, 2.0)
         ),
-
         *create_simulated_vehicle_nodes(
             namespace="sim_vehicle_1",
             start_pose=(604731.230, 5797112.750, 0.0),
             goal_position=(604791.7, 5797180.0),
             vehicle_id=222,
             v2x_id=222,
-            model_file=vehicle_model_file,
             map_file=map_file,
+            model_file=vehicle_model_file,
+            controllable=True,
+            optinlc_route_following=True,
+            controller=1,
+            debug=False,
+            composable=False,
             shape=(4.5, 2.0, 2.0)
         ),
-
         *create_simulated_vehicle_nodes(
             namespace="sim_vehicle_2",
             start_pose=(604787.6, 5797185.2, -1.8),
             goal_position=(604791.7, 5797180.0),
             vehicle_id=333,
             v2x_id=333,
-            model_file=vehicle_model_file,
             map_file=map_file,
+            model_file=vehicle_model_file,
+            controllable=True,
+            optinlc_route_following=True,
+            controller=1,
+            debug=False,
+            composable=False,
             shape=(4.5, 2.0, 2.0)
-        ),
+        )
+
+                             
     ])
