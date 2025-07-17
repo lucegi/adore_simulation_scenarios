@@ -40,7 +40,7 @@ def generate_launch_description():
         # ================ Vehicles ========================
         *create_simulated_vehicle_nodes(
             namespace="ego_vehicle",
-            start_pose=(604835.481, 5797113.518, 3.14),
+            start_position=(604835.481, 5797113.518, 3.14),
             goal_position=(604988.297, 5797111.0),
             vehicle_id=111,
             v2x_id=111,
@@ -51,7 +51,7 @@ def generate_launch_description():
 
         *create_simulated_vehicle_nodes(
             namespace="sim_vehicle_1",
-            start_pose=(604731.230, 5797112.750, 0.0),
+            start_position=(604731.230, 5797112.750, 0.0),
             goal_position=(604791.7, 5797180.0),
             vehicle_id=222,
             v2x_id=222,
@@ -62,7 +62,7 @@ def generate_launch_description():
 
         *create_simulated_vehicle_nodes(
             namespace="sim_vehicle_2",
-            start_pose=(604787.6, 5797185.2, -1.8),
+            start_position=(604787.6, 5797185.2, -1.8),
             goal_position=(604791.7, 5797180.0),
             vehicle_id=333,
             v2x_id=333,

@@ -33,7 +33,7 @@ def generate_launch_description():
 
         *create_simulated_vehicle_nodes(
             namespace="ego_vehicle",
-            start_pose=(604862.7, 5797111.9, 0.0),
+            start_position=(604862.7, 5797111.9, 0.0),
             goal_position=(604988.3, 5797111.0),
             map_file=map_file,
             model_file=vehicle_model_file,
