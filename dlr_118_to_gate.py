@@ -14,7 +14,7 @@ def generate_launch_description():
     map_folder = os.path.abspath(os.path.join(launch_file_dir, "../assets/tracks/"))
     vehicle_param = os.path.abspath(os.path.join(launch_file_dir, "../assets/vehicle_params/"))
     map_file = map_folder + "/de_bs_borders_wfs.r2sr"
-    vehicle_model_file = vehicle_param + "/NGC.json"
+    vehicle_model_file = vehicle_param + "/VC2.json"
 
     return LaunchDescription([
         *create_visualization_nodes(
