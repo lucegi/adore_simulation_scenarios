@@ -41,7 +41,7 @@ def generate_launch_description():
         *create_simulated_vehicle_nodes(
             namespace="ego_vehicle",
             start_pose=(604835.481, 5797113.518, 3.14),
-            goal_position=(604988.297, 5797111.0),
+            goal_position=(604791.7, 5797180.0),
             vehicle_id=111,
             v2x_id=111,
             model_file=vehicle_model_file,
@@ -58,6 +58,28 @@ def generate_launch_description():
             model_file=vehicle_model_file,
             map_file=map_file,
             shape=(4.5, 2.0, 2.0)
+        ),
+        
+        Node(
+            package='simulated_traffic_signal',
+            namespace="global",
+            executable='simulated_traffic_signal',
+            name='traffic_lights',
+            parameters=[
+                {"permanent_red": True},
+                {"traffic_lights": ["t1", "t2"]},
+                {"t1.x": 606520.572},
+                {"t1.y": 5797313.323},
+                {"t1.red_duration": 10.0},
+                {"t1.yellow_duration": 5.0},
+                {"t1.green_duration": 10.0},
+
+                {"t1.x": 604782.05},
+                {"t1.y": 5797152.62},
+                {"t1.red_duration": 10.0},
+                {"t1.yellow_duration": 5.0},
+                {"t1.green_duration": 10.0},
+            ]
         ),
 
         *create_simulated_vehicle_nodes(
