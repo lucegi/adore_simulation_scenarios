@@ -8,9 +8,9 @@ from scenario_helpers.simulated_vehicle import create_simulated_vehicle_nodes
 from scenario_helpers.simulated_vehicle import Position
 from scenario_helpers.visualizer import create_visualization_nodes
 
-start_position = Position(lat_long=(52.314562, 10.560474), psi=3.04)
+start_position = Position(lat_long=(52.314572, 10.560468), psi=3.14)
 #start_position = Position(utm=(606372, 5797172, 32, 'N'), psi=3.04)
-goal_position = Position(lat_long=(52.313533, 10.560554))
+goal_position = Position(lat_long=(52.314569, 10.560382))
 #goal_position = Position(utm=(606380, 5797058, 32, 'N'))
 
 def generate_launch_description():
